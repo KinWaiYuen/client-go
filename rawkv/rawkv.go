@@ -46,10 +46,12 @@ import (
 	"github.com/tikv/client-go/v2/internal/client"
 	"github.com/tikv/client-go/v2/internal/kvrpc"
 	"github.com/tikv/client-go/v2/internal/locate"
+	"github.com/tikv/client-go/v2/internal/logutil"
 	"github.com/tikv/client-go/v2/internal/retry"
 	"github.com/tikv/client-go/v2/metrics"
 	"github.com/tikv/client-go/v2/tikvrpc"
 	pd "github.com/tikv/pd/client"
+	"go.uber.org/zap"
 )
 
 var (
@@ -304,6 +306,99 @@ func (c *Client) BatchDelete(ctx context.Context, keys [][]byte) error {
 	cmdResp := resp.Resp.(*kvrpcpb.RawBatchDeleteResponse)
 	if cmdResp.GetError() != "" {
 		return errors.New(cmdResp.GetError())
+	}
+	return nil
+}
+
+// DeleteRange deletes all key-value pairs in a range from TiKV.
+func (c *Client) BatchDeleteRange(ctx context.Context, startKey []byte, endKey []byte, batchSize int) error {
+	start := time.Now()
+	tmpEndKey := endKey
+	tmpStartKey := startKey
+	var err error
+	defer func() {
+		var label = "delete_range"
+		if err != nil {
+			label += "_error"
+		}
+		metrics.TiKVRawkvCmdHistogram.WithLabelValues(label).Observe(time.Since(start).Seconds())
+	}()
+	bo := retry.NewBackofferWithVars(ctx, rawkvMaxBackoff, nil)
+
+	var i int = 0
+	var keyLocations []locate.KeyLocation = make([]locate.KeyLocation, batchSize)
+	for !bytes.Equal(tmpStartKey, tmpEndKey) {
+		for i = 0; i < batchSize; i++ {
+			loc, err := c.regionCache.LocateKey(bo, tmpStartKey)
+			if err != nil {
+				return err
+			}
+
+			if len(loc.EndKey) > 0 && bytes.Compare(loc.EndKey, tmpEndKey) < 0 {
+				tmpStartKey = loc.EndKey
+				keyLocations = append(keyLocations, locate.KeyLocation{StartKey: tmpStartKey, EndKey: loc.EndKey, Region: loc.Region})
+			} else {
+				tmpStartKey = tmpEndKey
+				keyLocations = append(keyLocations, locate.KeyLocation{StartKey: tmpStartKey, EndKey: tmpEndKey, Region: loc.Region})
+				break
+			}
+		}
+
+		bo, cancel := bo.Fork()
+		ch := make(chan error, len(keyLocations))
+		for _, batch := range keyLocations {
+			batch1 := batch
+			go func() {
+				singleBatchBackoffer, singleBatchCancel := bo.Fork()
+				defer singleBatchCancel()
+				ch <- c.doBatchDeleteRangeReq(singleBatchBackoffer, batch1)
+			}()
+		}
+
+		for i := 0; i < len(keyLocations); i++ {
+			if e := <-ch; e != nil {
+				cancel()
+				// catch the first error
+				if err == nil {
+					err = errors.WithStack(e)
+				}
+			}
+		}
+		if err != nil {
+			logutil.BgLogger().Error("doBatchDeleteRangeReq in channel err", zap.Error(err))
+		}
+	}
+
+	return nil
+}
+
+func (c *Client) doBatchDeleteRangeReq(bo *retry.Backoffer, request locate.KeyLocation) error {
+	var req *tikvrpc.Request = tikvrpc.NewRequest(tikvrpc.CmdRawDeleteRange, &kvrpcpb.RawDeleteRangeRequest{
+		StartKey: request.StartKey,
+		EndKey:   request.EndKey,
+	})
+
+	sender := locate.NewRegionRequestSender(c.regionCache, c.rpcClient)
+
+	req.MaxExecutionDurationMs = uint64(client.MaxWriteExecutionTime.Milliseconds())
+	// resp, err := sender.SendReq(bo, req, batch.RegionID, client.ReadTimeoutShort)
+	resp, err := sender.SendReq(bo, req, request.Region, client.ReadTimeoutShort)
+	if err != nil {
+		logutil.BgLogger().Error("snendReq err", zap.Any("req", request), zap.Error(err))
+		return err
+	}
+	regionErr, err := resp.GetRegionError()
+	if err != nil {
+		logutil.BgLogger().Error("getRegion err", zap.Any("req", request), zap.Error(err))
+		return err
+	}
+	if regionErr != nil {
+		err := bo.Backoff(retry.BoRegionMiss, errors.New(regionErr.String()))
+		if err != nil {
+			logutil.BgLogger().Error("backoff err", zap.Any("req", request), zap.Error(err))
+			return err
+		}
+		return c.doBatchDeleteRangeReq(bo, request)
 	}
 	return nil
 }

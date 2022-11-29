@@ -61,4 +61,9 @@ func main() {
 		panic(err)
 	}
 	fmt.Printf("found val: %s for key: %s\n", val, key)
+
+	err = cli.BatchDeleteRange(context.TODO(), key, val, 500)
+	if err != nil {
+		panic(err)
+	}
 }
