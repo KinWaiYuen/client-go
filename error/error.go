@@ -38,12 +38,12 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/KinWaiYuen/client-go/v2/internal/logutil"
+	"github.com/KinWaiYuen/client-go/v2/util"
 	"github.com/pingcap/errors"
 	"github.com/pingcap/kvproto/pkg/kvrpcpb"
 	"github.com/pingcap/kvproto/pkg/pdpb"
 	"github.com/pingcap/parser/terror"
-	"github.com/tikv/client-go/v2/internal/logutil"
-	"github.com/tikv/client-go/v2/util"
 	"go.uber.org/zap"
 )
 

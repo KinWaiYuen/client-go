@@ -41,10 +41,10 @@ import (
 	"sort"
 	"testing"
 
+	"github.com/KinWaiYuen/client-go/v2/testutils"
+	"github.com/KinWaiYuen/client-go/v2/tikv"
 	"github.com/pingcap/tidb/store/mockstore/mockcopr"
 	"github.com/stretchr/testify/suite"
-	"github.com/tikv/client-go/v2/testutils"
-	"github.com/tikv/client-go/v2/tikv"
 )
 
 func TestDeleteRange(t *testing.T) {

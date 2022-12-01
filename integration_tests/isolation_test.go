@@ -32,6 +32,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:build !race
 // +build !race
 
 package tikv_test
@@ -44,10 +45,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/KinWaiYuen/client-go/v2/tikv"
+	"github.com/KinWaiYuen/client-go/v2/txnkv/transaction"
 	"github.com/pingcap/tidb/kv"
 	"github.com/stretchr/testify/suite"
-	"github.com/tikv/client-go/v2/tikv"
-	"github.com/tikv/client-go/v2/txnkv/transaction"
 )
 
 func TestIsolation(t *testing.T) {

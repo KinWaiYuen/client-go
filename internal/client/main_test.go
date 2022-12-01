@@ -17,7 +17,7 @@ package client
 import (
 	"testing"
 
-	"github.com/tikv/client-go/v2/util"
+	"github.com/KinWaiYuen/client-go/v2/util"
 	"go.uber.org/goleak"
 )
 

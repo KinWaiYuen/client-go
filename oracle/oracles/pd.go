@@ -41,10 +41,10 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/KinWaiYuen/client-go/v2/internal/logutil"
+	"github.com/KinWaiYuen/client-go/v2/metrics"
+	"github.com/KinWaiYuen/client-go/v2/oracle"
 	"github.com/pingcap/errors"
-	"github.com/tikv/client-go/v2/internal/logutil"
-	"github.com/tikv/client-go/v2/metrics"
-	"github.com/tikv/client-go/v2/oracle"
 	pd "github.com/tikv/pd/client"
 	"go.uber.org/zap"
 )

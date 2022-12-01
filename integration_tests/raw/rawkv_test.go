@@ -40,11 +40,11 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/KinWaiYuen/client-go/v2/rawkv"
+	"github.com/KinWaiYuen/client-go/v2/testutils"
+	"github.com/KinWaiYuen/client-go/v2/tikv"
 	"github.com/pingcap/tidb/store/mockstore/unistore"
 	"github.com/stretchr/testify/suite"
-	"github.com/tikv/client-go/v2/rawkv"
-	"github.com/tikv/client-go/v2/testutils"
-	"github.com/tikv/client-go/v2/tikv"
 )
 
 func TestRawKV(t *testing.T) {

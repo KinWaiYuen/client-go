@@ -1,6 +1,6 @@
 # TiKV Go Client Example
 
-TiKV Go Client Example provides examples for [TiKV Go Client](https://github.com/tikv/client-go)
+TiKV Go Client Example provides examples for [TiKV Go Client](https://github.com/KinWaiYuen/client-go)
 
 ## Developing 
 ### Building Examples:

@@ -45,4 +45,4 @@ require (
 	honnef.co/go/tools v0.2.0 // indirect
 )
 
-replace github.com/tikv/client-go/v2 => ./
+replace github.com/KinWaiYuen/client-go/v2 => ./

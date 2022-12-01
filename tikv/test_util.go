@@ -35,9 +35,9 @@
 package tikv
 
 import (
+	"github.com/KinWaiYuen/client-go/v2/internal/locate"
 	"github.com/google/uuid"
 	"github.com/pingcap/errors"
-	"github.com/tikv/client-go/v2/internal/locate"
 	pd "github.com/tikv/pd/client"
 )
 

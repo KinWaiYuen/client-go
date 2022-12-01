@@ -18,8 +18,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/tikv/client-go/v2/config"
-	"github.com/tikv/client-go/v2/rawkv"
+	"github.com/KinWaiYuen/client-go/v2/config"
+	"github.com/KinWaiYuen/client-go/v2/rawkv"
 )
 
 func main() {
@@ -61,4 +61,10 @@ func main() {
 		panic(err)
 	}
 	fmt.Printf("found val: %s for key: %s\n", val, key)
+
+	err = cli.BatchDeleteRange(context.TODO(), key, val, 500)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("delete range from: %s to: %s\n", key, val)
 }

@@ -41,8 +41,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/KinWaiYuen/client-go/v2/internal/logutil"
 	"github.com/pingcap/errors"
-	"github.com/tikv/client-go/v2/internal/logutil"
 	"go.uber.org/zap"
 )
 

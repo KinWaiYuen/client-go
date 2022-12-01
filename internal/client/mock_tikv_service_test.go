@@ -27,10 +27,10 @@ import (
 	"sync"
 	"time"
 
+	"github.com/KinWaiYuen/client-go/v2/internal/logutil"
 	"github.com/pingcap/kvproto/pkg/coprocessor"
 	"github.com/pingcap/kvproto/pkg/kvrpcpb"
 	"github.com/pingcap/kvproto/pkg/tikvpb"
-	"github.com/tikv/client-go/v2/internal/logutil"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 )

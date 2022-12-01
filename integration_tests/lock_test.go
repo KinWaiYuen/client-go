@@ -44,19 +44,19 @@ import (
 	"testing"
 	"time"
 
+	tikverr "github.com/KinWaiYuen/client-go/v2/error"
+	"github.com/KinWaiYuen/client-go/v2/kv"
+	"github.com/KinWaiYuen/client-go/v2/oracle"
+	"github.com/KinWaiYuen/client-go/v2/tikv"
+	"github.com/KinWaiYuen/client-go/v2/tikvrpc"
+	"github.com/KinWaiYuen/client-go/v2/txnkv"
+	"github.com/KinWaiYuen/client-go/v2/txnkv/transaction"
+	"github.com/KinWaiYuen/client-go/v2/txnkv/txnlock"
 	"github.com/pingcap/errors"
 	"github.com/pingcap/failpoint"
 	deadlockpb "github.com/pingcap/kvproto/pkg/deadlock"
 	"github.com/pingcap/kvproto/pkg/kvrpcpb"
 	"github.com/stretchr/testify/suite"
-	tikverr "github.com/tikv/client-go/v2/error"
-	"github.com/tikv/client-go/v2/kv"
-	"github.com/tikv/client-go/v2/oracle"
-	"github.com/tikv/client-go/v2/tikv"
-	"github.com/tikv/client-go/v2/tikvrpc"
-	"github.com/tikv/client-go/v2/txnkv"
-	"github.com/tikv/client-go/v2/txnkv/transaction"
-	"github.com/tikv/client-go/v2/txnkv/txnlock"
 )
 
 var getMaxBackoff = tikv.ConfigProbe{}.GetGetMaxBackoff()

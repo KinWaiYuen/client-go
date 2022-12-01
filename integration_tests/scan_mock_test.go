@@ -38,8 +38,8 @@ import (
 	"context"
 	"testing"
 
+	"github.com/KinWaiYuen/client-go/v2/tikv"
 	"github.com/stretchr/testify/suite"
-	"github.com/tikv/client-go/v2/tikv"
 )
 
 func TestScanMock(t *testing.T) {

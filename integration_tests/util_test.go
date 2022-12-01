@@ -42,15 +42,15 @@ import (
 	"testing"
 	"unsafe"
 
+	"github.com/KinWaiYuen/client-go/v2/config"
+	"github.com/KinWaiYuen/client-go/v2/tikv"
+	"github.com/KinWaiYuen/client-go/v2/txnkv/transaction"
+	"github.com/KinWaiYuen/client-go/v2/util/codec"
 	"github.com/pingcap/errors"
 	"github.com/pingcap/tidb/kv"
 	txndriver "github.com/pingcap/tidb/store/driver/txn"
 	"github.com/pingcap/tidb/store/mockstore/unistore"
 	"github.com/stretchr/testify/require"
-	"github.com/tikv/client-go/v2/config"
-	"github.com/tikv/client-go/v2/tikv"
-	"github.com/tikv/client-go/v2/txnkv/transaction"
-	"github.com/tikv/client-go/v2/util/codec"
 	pd "github.com/tikv/pd/client"
 )
 

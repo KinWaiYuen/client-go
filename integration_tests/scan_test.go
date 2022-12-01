@@ -39,9 +39,9 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/KinWaiYuen/client-go/v2/kv"
+	"github.com/KinWaiYuen/client-go/v2/tikv"
 	"github.com/stretchr/testify/suite"
-	"github.com/tikv/client-go/v2/kv"
-	"github.com/tikv/client-go/v2/tikv"
 )
 
 var scanBatchSize = tikv.ConfigProbe{}.GetScanBatchSize()

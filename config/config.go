@@ -40,10 +40,10 @@ import (
 	"strings"
 	"sync/atomic"
 
+	"github.com/KinWaiYuen/client-go/v2/internal/logutil"
+	"github.com/KinWaiYuen/client-go/v2/oracle"
+	"github.com/KinWaiYuen/client-go/v2/util"
 	"github.com/pingcap/errors"
-	"github.com/tikv/client-go/v2/internal/logutil"
-	"github.com/tikv/client-go/v2/oracle"
-	"github.com/tikv/client-go/v2/util"
 	"go.uber.org/zap"
 )
 

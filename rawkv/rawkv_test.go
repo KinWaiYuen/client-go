@@ -39,11 +39,11 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/KinWaiYuen/client-go/v2/internal/locate"
+	"github.com/KinWaiYuen/client-go/v2/internal/mockstore/mocktikv"
+	"github.com/KinWaiYuen/client-go/v2/internal/retry"
+	"github.com/KinWaiYuen/client-go/v2/kv"
 	"github.com/stretchr/testify/suite"
-	"github.com/tikv/client-go/v2/internal/locate"
-	"github.com/tikv/client-go/v2/internal/mockstore/mocktikv"
-	"github.com/tikv/client-go/v2/internal/retry"
-	"github.com/tikv/client-go/v2/kv"
 )
 
 func TestRawKV(t *testing.T) {

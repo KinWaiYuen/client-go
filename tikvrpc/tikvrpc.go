@@ -40,6 +40,8 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/KinWaiYuen/client-go/v2/kv"
+	"github.com/KinWaiYuen/client-go/v2/oracle"
 	"github.com/pingcap/errors"
 	"github.com/pingcap/kvproto/pkg/coprocessor"
 	"github.com/pingcap/kvproto/pkg/debugpb"
@@ -48,8 +50,6 @@ import (
 	"github.com/pingcap/kvproto/pkg/metapb"
 	"github.com/pingcap/kvproto/pkg/mpp"
 	"github.com/pingcap/kvproto/pkg/tikvpb"
-	"github.com/tikv/client-go/v2/kv"
-	"github.com/tikv/client-go/v2/oracle"
 )
 
 // CmdType represents the concrete request type in Request or response type in Response.

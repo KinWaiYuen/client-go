@@ -41,6 +41,8 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/KinWaiYuen/client-go/v2/tikvrpc"
+	"github.com/KinWaiYuen/client-go/v2/util"
 	"github.com/opentracing/opentracing-go"
 	"github.com/pingcap/errors"
 	"github.com/pingcap/kvproto/pkg/coprocessor"
@@ -49,8 +51,6 @@ import (
 	"github.com/pingcap/kvproto/pkg/kvrpcpb"
 	"github.com/pingcap/kvproto/pkg/metapb"
 	"github.com/pingcap/parser/terror"
-	"github.com/tikv/client-go/v2/tikvrpc"
-	"github.com/tikv/client-go/v2/util"
 )
 
 // For gofail injection.

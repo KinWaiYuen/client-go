@@ -39,14 +39,14 @@ import (
 	"context"
 	"time"
 
+	tikverr "github.com/KinWaiYuen/client-go/v2/error"
+	"github.com/KinWaiYuen/client-go/v2/internal/client"
+	"github.com/KinWaiYuen/client-go/v2/internal/locate"
+	"github.com/KinWaiYuen/client-go/v2/internal/retry"
+	"github.com/KinWaiYuen/client-go/v2/kv"
+	"github.com/KinWaiYuen/client-go/v2/tikvrpc"
 	"github.com/pingcap/errors"
 	"github.com/pingcap/kvproto/pkg/kvrpcpb"
-	tikverr "github.com/tikv/client-go/v2/error"
-	"github.com/tikv/client-go/v2/internal/client"
-	"github.com/tikv/client-go/v2/internal/locate"
-	"github.com/tikv/client-go/v2/internal/retry"
-	"github.com/tikv/client-go/v2/kv"
-	"github.com/tikv/client-go/v2/tikvrpc"
 )
 
 type storage interface {

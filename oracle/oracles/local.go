@@ -39,7 +39,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tikv/client-go/v2/oracle"
+	"github.com/KinWaiYuen/client-go/v2/oracle"
 )
 
 var _ oracle.Oracle = &localOracle{}

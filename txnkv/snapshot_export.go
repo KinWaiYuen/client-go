@@ -15,7 +15,7 @@
 package txnkv
 
 import (
-	"github.com/tikv/client-go/v2/txnkv/txnsnapshot"
+	"github.com/KinWaiYuen/client-go/v2/txnkv/txnsnapshot"
 )
 
 // Scanner support tikv scan

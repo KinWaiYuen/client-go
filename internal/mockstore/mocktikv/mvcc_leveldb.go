@@ -39,6 +39,10 @@ import (
 	"math"
 	"sync"
 
+	"github.com/KinWaiYuen/client-go/v2/internal/logutil"
+	"github.com/KinWaiYuen/client-go/v2/internal/mockstore/deadlock"
+	"github.com/KinWaiYuen/client-go/v2/oracle"
+	"github.com/KinWaiYuen/client-go/v2/util/codec"
 	"github.com/dgryski/go-farm"
 	"github.com/pingcap/errors"
 	"github.com/pingcap/goleveldb/leveldb"
@@ -48,10 +52,6 @@ import (
 	"github.com/pingcap/goleveldb/leveldb/util"
 	"github.com/pingcap/kvproto/pkg/kvrpcpb"
 	"github.com/pingcap/parser/terror"
-	"github.com/tikv/client-go/v2/internal/logutil"
-	"github.com/tikv/client-go/v2/internal/mockstore/deadlock"
-	"github.com/tikv/client-go/v2/oracle"
-	"github.com/tikv/client-go/v2/util/codec"
 	"go.uber.org/zap"
 )
 

@@ -41,10 +41,10 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/KinWaiYuen/client-go/v2/kv"
 	leveldb "github.com/pingcap/goleveldb/leveldb/memdb"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/tikv/client-go/v2/kv"
 )
 
 type KeyFlags = kv.KeyFlags

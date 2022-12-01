@@ -37,10 +37,10 @@ package tikv
 import (
 	"time"
 
+	"github.com/KinWaiYuen/client-go/v2/internal/client"
+	"github.com/KinWaiYuen/client-go/v2/internal/locate"
+	"github.com/KinWaiYuen/client-go/v2/tikvrpc"
 	"github.com/pingcap/kvproto/pkg/metapb"
-	"github.com/tikv/client-go/v2/internal/client"
-	"github.com/tikv/client-go/v2/internal/locate"
-	"github.com/tikv/client-go/v2/tikvrpc"
 	pd "github.com/tikv/pd/client"
 )
 

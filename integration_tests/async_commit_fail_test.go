@@ -41,13 +41,13 @@ import (
 	"testing"
 	"time"
 
+	tikverr "github.com/KinWaiYuen/client-go/v2/error"
+	"github.com/KinWaiYuen/client-go/v2/tikv"
+	"github.com/KinWaiYuen/client-go/v2/util"
 	"github.com/pingcap/errors"
 	"github.com/pingcap/failpoint"
 	"github.com/pingcap/kvproto/pkg/kvrpcpb"
 	"github.com/stretchr/testify/suite"
-	tikverr "github.com/tikv/client-go/v2/error"
-	"github.com/tikv/client-go/v2/tikv"
-	"github.com/tikv/client-go/v2/util"
 )
 
 func TestAsyncCommitFail(t *testing.T) {

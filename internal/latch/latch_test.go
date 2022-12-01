@@ -38,8 +38,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/KinWaiYuen/client-go/v2/oracle"
 	"github.com/stretchr/testify/assert"
-	"github.com/tikv/client-go/v2/oracle"
 	"go.uber.org/atomic"
 )
 
