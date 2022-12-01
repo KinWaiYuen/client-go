@@ -1,4 +1,4 @@
-module github.com/tikv/client-go/v2
+module github.com/KinWaiYuen/client-go/v2
 
 go 1.15
 
@@ -44,3 +44,5 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	honnef.co/go/tools v0.2.0 // indirect
 )
+
+replace github.com/tikv/client-go/v2 => ./
