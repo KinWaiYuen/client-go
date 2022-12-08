@@ -387,9 +387,10 @@ func (c *Client) BatchDeleteRange(ctx context.Context, startKey []byte, endKey [
 		for _, batch := range keyLocations {
 			batch1 := batch
 			go func() {
+				batch2 := batch1
 				singleBatchBackoffer, singleBatchCancel := bo.Fork()
 				defer singleBatchCancel()
-				ch <- c.doBatchDeleteRangeReq(singleBatchBackoffer, batch1)
+				ch <- c.doBatchDeleteRangeReq(singleBatchBackoffer, batch2)
 			}()
 		}
 
@@ -412,6 +413,9 @@ func (c *Client) BatchDeleteRange(ctx context.Context, startKey []byte, endKey [
 
 func (c *Client) doBatchDeleteRangeReq(bo *retry.Backoffer, request locate.KeyLocation) error {
 	logutil.BgLogger().Info("doBatchDeleteRangeReq", zap.Any("request", request), zap.String("content", request.String()))
+	if request.StartKey == nil || request.EndKey == nil {
+		return nil
+	}
 	var req *tikvrpc.Request = tikvrpc.NewRequest(tikvrpc.CmdRawDeleteRange, &kvrpcpb.RawDeleteRangeRequest{
 		StartKey: request.StartKey,
 		EndKey:   request.EndKey,
